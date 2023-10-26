@@ -1,0 +1,15 @@
+<app-navbar></app-navbar>
+<div class="mx-auto mt-5 card " *ngIf="author" style="width: 18rem;">
+    <div class="mx-auto">
+        <h4>{{author.name}}</h4>
+        <p>{{author.bio}}</p>
+        <p>Les articles de l'auteur :</p>
+       
+            <div *ngFor="let article of authorArticle">
+                <p>{{ article.title }}</p>
+            </div>
+
+       
+      
+    </div>
+</div>

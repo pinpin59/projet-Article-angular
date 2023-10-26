@@ -1,0 +1,58 @@
+<app-navbar></app-navbar>
+<div class="mx-auto w-50">
+    <h1>Choisir l'article à la une : </h1>
+    <div *ngIf="data">
+        <select class="form-select" [(ngModel)]="selectedFeaturedArticle" id="floatingSelect" aria-label="Floating label select example">
+          <option selected>Selection de l'article à la une</option>
+          <option *ngFor="let d of articles" [value]="d.id">{{d.id}}</option>
+        
+        </select>
+    </div>
+    <button class="btn btn-primary mt-3" (click)="changeFeaturedArticle()">Envoyer</button>
+</div>
+
+
+<div class="w-50 mx-auto">
+    <h2>Modifier un article au choix : </h2>
+    <div *ngIf="data">
+        <select  class="form-select" id="floatingSelect"  [(ngModel)]="selectedArticleChange" (change)="onSelectChange()">
+          <option selected>Selection de l'article à modifier</option>
+          <option *ngFor="let article of data.articles" [value]="article.id">{{article.id}}</option>
+        </select>
+
+        <div class="mt-4" *ngIf="selectedArticleChange && currentArticle">
+            <h2>Modifier l'article</h2>
+        
+            <form [formGroup]="formCurrentArticle" (ngSubmit)="updateArticle()">
+              <div class="mb-3">
+                <label for="title" class="form-label">Titre</label>
+                <input type="text" id="title" class="form-control"  formControlName="title" name="title">
+              </div>
+              <div class="mb-3">
+                <label for="content" class="form-label">Contenu</label>
+                <textarea id="content" class="form-control"  formControlName="content" name="content"></textarea>
+              </div>
+              <div class="mb-3">
+                <label for="summary" class="form-label">Résumé</label>
+                <input type="text" id="summary" class="form-control"  formControlName="summary" name="summary">
+              </div>
+        
+              <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
+            </form>
+          </div>
+        </div>
+</div>
+
+
+<div class="w-50 mx-auto">
+    <h2>Modifier la bio d'un auteur : </h2>
+    <select class="form-select" id="floatingSelect"  [(ngModel)]="selectedAuthorChange" (change)="onSelectAuthorChange()">
+        <option selected>Selection de l'article à modifier</option>
+        <option *ngFor="let d of authors" [value]="d.id">{{d.id}}</option>
+    </select>
+
+    <div class="mt-4" *ngIf="selectedAuthorChange && currentAuthor">
+        <p>{{currentAuthor[0].name}}</p>
+        <p>{{currentAuthor[0].bio}}</p>
+    </div>
+</div>
